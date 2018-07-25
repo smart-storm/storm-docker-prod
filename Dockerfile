@@ -23,8 +23,8 @@ WORKDIR /storm/storm-api
 COPY utils.js /storm/storm-api/
 RUN npm install
 
-COPY --from=cent /storm/storm-ui/dist/ /var/www/html/storm-ui
-COPY --from=cent /storm/storm-website/ /var/www/html/storm-website
+RUN mkdir -p /var/www/html/storm-ui && cp -r /storm/storm-ui/dist/* /var/www/html/storm-ui
+RUN mkdir -p /var/www/html/storm-website && cp -r /storm/storm-website/* /var/www/html/storm-website
 COPY storm.ui.conf /etc/nginx/conf.d/storm.ui.conf
 COPY storm.web.conf /etc/nginx/conf.d/storm.web.conf
 
