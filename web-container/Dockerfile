@@ -20,7 +20,7 @@ RUN npm install
 RUN ng build --prod
 
 WORKDIR /storm/storm-api
-COPY utils.js /storm/storm-api/
+COPY config.js /storm/storm-api/
 RUN npm install
 
 RUN mkdir -p /var/www/html/storm-ui && cp -r /storm/storm-ui/dist/* /var/www/html/storm-ui

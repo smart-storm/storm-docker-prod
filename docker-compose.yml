@@ -1,29 +1,31 @@
 version: '3'
 services:
   web:
-    build: .
+    build: ./web-container
     ports:
      - "80:8080"
-    volumes:
-      - ../smartstorm-files:/storm
   mongo:
     image: "mongo:latest"
-#    ports:
-#      - "27017:27017"
+    ports:
+      - "27017:27017"
+  streaming:
+    build: ./streaming-container
+    ports:
+      - "8080:8080"
   cassandra:
     build: ./cassandra-container
-#    ports:
-#      - "9042:9042"
+    ports:
+      - "9042:9042"
   zookeeper:
     image: wurstmeister/zookeeper
     ports:
       - "2181:2181"
   kafka:
-    build: .
+    image: wurstmeister/kafka
     ports:
-      - "9092"
+      - "9092:9092"
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
+      KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1 # change to docker-machine ip, if used on windows/mac
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
