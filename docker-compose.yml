@@ -25,7 +25,7 @@ services:
     ports:
       - "9092:9092"
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1 # change to docker-machine ip, if used on windows/mac
+      KAFKA_ADVERTISED_HOST_NAME: 172.17.0.1 # change to docker-machine ip, if used on windows/mac; on linux check ifconfig -a for docker0 interface ip
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock

@@ -7,7 +7,7 @@ RUN yum -y install epel-release
 RUN yum -y install nginx
 RUN yum -y install supervisor
 RUN npm install pm2 -g
-RUN npm install @angular/cli -g --unsafe
+RUN npm install @angular/cli@1.4.7 -g --unsafe
 
 WORKDIR /storm
 RUN git clone https://github.com/smart-storm/storm-ui.git
