@@ -4,7 +4,7 @@ services:
     build: ./web-container
     ports:
      - "80:8080"
-     depends-on:
+     depends_on:
      - mongo
   mongo:
     image: "mongo:latest"
@@ -14,7 +14,7 @@ services:
     build: ./streaming-container
     ports:
       - "8080:8080"
-    depends-on:
+    depends_on:
       - cassandra
   cassandra:
     build: ./cassandra-container
@@ -33,5 +33,5 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    depends-on:
+    depends_on:
       - zookeeper
