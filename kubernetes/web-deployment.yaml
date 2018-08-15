@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  labels:
+    app: web
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: web
+    tier: web
+  type: LoadBalancer
+---
+apiVersion: apps/v1 # 
+kind: Deployment
+metadata:
+  name: web
+  labels:
+    app: web
+spec:
+  selector:
+    matchLabels:
+      app: web
+      tier: web
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: web
+        tier: web
+    spec:
+      containers:
+      - image: smartstorm/web
+        name: web
+        ports:
+        - containerPort: 8080
+          name: wordpress
