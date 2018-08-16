@@ -51,4 +51,11 @@ To access services add these lines to /etc/hosts:
 
 Use equivalent solution in your system, remember to change `127.0.0.1` to docker host ip address
 
+#### Google cloud usage
+
+
+
+
+
+
 
