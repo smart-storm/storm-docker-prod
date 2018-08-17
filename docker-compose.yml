@@ -4,7 +4,7 @@ services:
     build: ./web-container
     ports:
      - "80:8080"
-     depends_on:
+    depends_on:
      - mongo
   mongo:
     image: "mongo:latest"

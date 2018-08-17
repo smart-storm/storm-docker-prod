@@ -1,41 +1,39 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: web
+  name: streaming
   labels:
     app: web
 spec:
   ports:
-    - port: 80
-      targetPort: 8080
-      name: web
+    - port: 8080
   selector:
     app: web
-    tier: web
+    tier: streaming
   type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web
+  name: streaming
   labels:
     app: web
 spec:
   selector:
     matchLabels:
       app: web
-      tier: web
+      tier: streaming
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
         app: web
-        tier: web
+        tier: streaming
     spec:
       containers:
-      - image: smartstorm/web
-        name: web
+      - image: smartstorm/streaming
+        name: streaming
         ports:
         - containerPort: 8080
-          name: wordpress
+          name: streaming
