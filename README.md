@@ -51,7 +51,17 @@ To access services add these lines to /etc/hosts:
 
 Use equivalent solution in your system, remember to change `127.0.0.1` to docker host ip address
 
-#### Google cloud usage
+## Google Cloud usage
+
+To enable it on Google Cloud:
+* Create Kubernetes Cluster in Google Cloud Console
+* Activate cloud shell (right top corner)
+* Git clone this repository
+* Activate each component in kuberenetes folder using: `kubectl create -f <file_name>.yaml`
+
+## Docker Hub
+
+Modified images of smartstorm deployment can be found on [DockerHub](https://hub.docker.com/u/smartstorm/dashboard/)
 
 
 
