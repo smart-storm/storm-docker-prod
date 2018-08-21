@@ -52,7 +52,7 @@ spec:
           name: cassandra
         volumeMounts:
         - name: cassandra-persistent-storage
-          mountPath: /data/db
+          mountPath: /var/lib/cassandra
       volumes:
       - name: cassandra-persistent-storage
         persistentVolumeClaim:
