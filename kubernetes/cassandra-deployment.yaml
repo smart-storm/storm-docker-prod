@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cassandra
+  labels:
+    app: web
+spec:
+  ports:
+    - port: 27017
+  selector:
+    app: web
+    tier: cassandra
+  clusterIP: None
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cassandra-pv-claim
+  labels:
+    app: web
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: cassandra
+  labels:
+    app: web
+spec:
+  selector:
+    matchLabels:
+      app: web
+      tier: cassandra
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: web
+        tier: cassandra
+    spec:
+      containers:
+      - image: cassandra:latest
+        name: mongo
+        ports:
+        - containerPort: 27017
+          name: cassandra
+        volumeMounts:
+        - name: cassandra-persistent-storage
+          mountPath: /data/db
+      volumes:
+      - name: cassandra-persistent-storage
+        persistentVolumeClaim:
+          claimName: cassandra-pv-claim
