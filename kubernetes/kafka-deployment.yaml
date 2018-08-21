@@ -52,5 +52,3 @@ spec:
         ports:
         - containerPort: 2181
           name: zookeeper
-        
-      
